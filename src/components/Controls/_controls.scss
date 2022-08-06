@@ -1,0 +1,227 @@
+.controls {
+    @include flexCenter;
+    height: $height-1;
+    background-color: $color-bg-dark-2;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    z-index: 100;
+    padding: $pd-4 $pd-2;
+    color: $color-white-0;
+    z-index: 99999999999999;
+    display: none;
+    .details {
+        width: $width-2;
+        .media {
+            display: flex;
+            .media-left {
+                @include flexCenter;
+                padding: 0 $pd-4;
+                .media-thumb {
+                    padding-right: $pd-4;
+                    img {
+                        width: 60px;
+                        height: 60px;
+                        object-fit: cover;
+                        border-radius: $radius-3;
+                    }
+                }
+                .media-content {
+                    .media-content-title {
+                        @include lineClamp(1);
+
+                        @include fontSet($fs-0, $fw-0, $line-height-0, $color-white-0);
+                    }
+                    .media-content-subtitle {
+                        @include lineClamp(1);
+
+                        @include fontSet($fs-6, $fw-1, $line-height-1, $color-gray-3);
+                    }
+                }
+            }
+            .media-right {
+                display: flex;
+                align-items: center;
+                font-size: $fs-4;
+                .media-right-item {
+                    margin-left: $mg-1;
+                    .media-thumb-btn {
+                        padding: $pd-5;
+                        border-radius: $radius-1;
+                        @include centerItemWithMargin;
+                        &:hover {
+                            cursor: pointer;
+                            background-color: $color-hover-btn;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .player {
+        max-width: 40vw;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .controls-main {
+            display: flex;
+            align-items: center;
+            .controls-top-item {
+                cursor: pointer;
+                padding: $pd-5;
+                border-radius: $radius-1;
+                margin: 0 $mg-4;
+                &:hover {
+                    background-color: $color-hover-btn;
+                }
+                .control-btn {
+                    font-size: $fs-4;
+                    @include centerItemWithMargin;
+                }
+            }
+            .controls-btn-play {
+                position: relative;
+                &:hover {
+                    background-color: transparent;
+                }
+                .btn-play {
+                    font-size: $fs-8;
+                    &:hover {
+                        color: $color-primary;
+                    }
+                }
+            }
+        }
+    }
+    .options {
+        width: $width-2;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        font-size: $fs-4;
+        .option-item {
+            padding: $pd-4;
+            margin-left: $mg-9;
+            cursor: pointer;
+            &:hover {
+                background-color: $color-hover-btn;
+                border-radius: $radius-1;
+            }
+            .option-item-icon {
+                @include centerItemWithMargin;
+            }
+        }
+    }
+}
+
+.time-progress {
+    width: 100%;
+    @include flexCenter;
+    .time-block {
+        min-width: 42px;
+        user-select: none;
+    }
+}
+
+.progress-area {
+    margin: 0 20px;
+    height: 3px;
+    width: 100%;
+    border-radius: 50px;
+    background: $color-bg-dark-1;
+    cursor: pointer;
+    position: relative;
+    &:hover {
+        height: 6px;
+        .progress-bar-line .progress-bar-line-point {
+            display: block;
+        }
+    }
+    .progress-bar-line {
+        height: inherit;
+        width: 0;
+        position: absolute;
+        border-radius: inherit;
+        background: $color-white-0;
+        &::before {
+            content: '';
+            position: absolute;
+            height: 12px;
+            width: 12px;
+            border-radius: 50%;
+            top: 50%;
+            right: -5px;
+            z-index: 2;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(-50%);
+            background: inherit;
+            transition: opacity 0.2s ease;
+        }
+        &:hover {
+            .progress-bar-line-point {
+                display: block;
+            }
+        }
+        .progress-bar-line-point {
+            content: '';
+            width: 14px;
+            height: 14px;
+            position: absolute;
+            background-color: $color-white-0;
+            box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+            right: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-radius: 50%;
+            display: none;
+        }
+    }
+    .progress-bar {
+        background: transparent;
+        -webkit-appearance: none;
+        appearance: none;
+        height: inherit;
+        outline: none;
+        opacity: 0.7;
+        -webkit-transition: 0.2s;
+        transition: opacity 0.2s;
+        border-radius: inherit;
+        left: 0;
+        right: 0;
+        position: absolute;
+        cursor: pointer;
+    }
+    .progress-bar::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 12px;
+        height: 6px;
+        cursor: pointer;
+        z-index: 1000000000;
+    }
+    input[type='range']::-webkit-slider-runnable-track {
+        -webkit-appearance: none;
+    }
+    &:hover > .progress-bar::before {
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+
+.loading-audio {
+    z-index: 9999;
+    position: absolute;
+    background-color: $color-bg-dark-2;
+    .loader {
+        height: 100%;
+        text-align: center;
+        display: inline-block;
+        vertical-align: top;
+    }
+    svg path,
+    svg rect {
+        fill: $color-white-0;
+    }
+}
